@@ -112,6 +112,13 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
         return tmpDir;
     }
 
+    private String fileProviderAuthorities = "provider";
+
+    @ReactMethod
+    public void setFileProviderAuthorities(String fileProviderAuthorities) {
+      this.fileProviderAuthorities = fileProviderAuthorities;
+    }
+
     @Override
     public String getName() {
         return "ImageCropPicker";
@@ -314,7 +321,7 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
                 mCameraCaptureURI = Uri.fromFile(dataFile);
             } else {
                 mCameraCaptureURI = FileProvider.getUriForFile(activity,
-                        activity.getApplicationContext().getPackageName() + ".provider",
+                        activity.getApplicationContext().getPackageName() + this.fileProviderAuthorities,
                         dataFile);
             }
 
